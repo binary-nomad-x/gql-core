@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "ts-node src/index.ts",
+    "studio": "npx prisma studio"
   },
   "keywords": [],
   "author": "",
@@ -11,7 +12,13 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^25.0.10",
+    "prisma": "^7.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@apollo/server": "^5.3.0",
+    "@prisma/client": "^7.3.0",
+    "graphql": "^16.12.0"
   }
 }
