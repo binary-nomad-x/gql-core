@@ -1,7 +1,8 @@
 services:
   db:
-    image: postgres:16
+    image: postgres:17-alpine # pgsql 18 has no image on docker hub now until dec 2026
     container_name: nexus_pg
+    restart: always
     ports:
       - "5432:5432"
     environment:
