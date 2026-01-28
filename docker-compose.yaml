@@ -1,5 +1,5 @@
 services:
-  db:
+  db: # host computer yani windows se docker ka bahr software se connect krny k liye host men locahost likhen
     image: postgres:17-alpine # pgsql 18 has no image on docker hub now until dec 2026
     container_name: gql-postgres
     restart: always
