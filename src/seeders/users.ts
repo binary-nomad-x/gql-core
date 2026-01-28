@@ -1,32 +1,31 @@
-// src/seeders/users.ts
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { generateUser, generateProfile } from './lib';
 
 const prisma = new PrismaClient();
 const USER_COUNT = 500;
 
 export async function seedUsers() {
-  console.log(`👤 Seeding ${USER_COUNT} Users and Profiles...`);
+  console.log(`🚀 Blazing Fast Seed: ${USER_COUNT} Users & Profiles...`);
   
-  // 1. Generate Data Arrays
-  const users = [];
-  const profiles = [];
+  // 1. Generate Data Arrays with Explicit Types
+  // Prisma.UserCreateManyInput use karne se types ka error kabhi nahi ayega
+  const users: Prisma.UserCreateManyInput[] = Array.from({ length: USER_COUNT }).map((_, i) => 
+    generateUser(i + 1)
+  );
 
-  for (let i = 1; i <= USER_COUNT; i++) {
-    const user = generateUser(i);
-    users.push(user);
-    profiles.push(generateProfile(i)); // Profile ID must match User ID (assuming incremental)
+  const profiles: Prisma.ProfileCreateManyInput[] = Array.from({ length: USER_COUNT }).map((_, i) => 
+    generateProfile(i + 1)
+  );
+
+  // 2. Transaction for Maximum Speed
+  // $transaction use karne se ya toh dono insert honge ya koi nahi (Atomic)
+  try {
+    await prisma.$transaction([
+      prisma.user.createMany({ data: users, skipDuplicates: true }),
+      prisma.profile.createMany({ data: profiles, skipDuplicates: true }),
+    ]);
+    console.log('✅ Bulk Seed Complete!');
+  } catch (error) {
+    console.error('❌ Bulk Seed Failed:', error);
   }
-
-  // 2. Insert Users in Bulk
-  await prisma.user.createMany({
-    data: users,
-    skipDuplicates: true,
-  });
-
-  // 3. Insert Profiles in Bulk (Using the IDs we just generated)
-  await prisma.profile.createMany({
-    data: profiles,
-    skipDuplicates: true,
-  });
 }
