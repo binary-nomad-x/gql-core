@@ -1,10 +1,16 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg'; // Naya import
+import { Pool } from 'pg'; // Naya import
+import 'dotenv/config'; // Taake .env load ho jaye
 
-const prisma = new PrismaClient();
+// 1. Database Connection Setup
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter }); // Adapter pass karna zaroori hai
 
-// 1. Type Definitions (Aapka API kaisa dikhega)
+// 2. Type Definitions
 const typeDefs = `#graphql
   type User {
     id: ID!
@@ -16,7 +22,7 @@ const typeDefs = `#graphql
   }
 `;
 
-// 2. Resolvers (Data kahan se aayega)
+// 3. Resolvers
 const resolvers = {
   Query: {
     users: () => prisma.user.findMany(),
@@ -26,7 +32,9 @@ const resolvers = {
 const server = new ApolloServer({ typeDefs, resolvers });
 
 async function startServer() {
-  const { url } = await startStandaloneServer(server, { listen: { port: 4000 } });
+  const { url } = await startStandaloneServer(server, { 
+    listen: { port: 4000 } 
+  });
   console.log(`🚀 Server ready at ${url}`);
 }
 
