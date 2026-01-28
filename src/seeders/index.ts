@@ -14,8 +14,9 @@ async function main() {
   console.log('🚀 [IGNITION] Starting Blazing Fast Seed...');
 
   // 1. Wipe DB in Parallel (Order doesn't matter for deletion)
+  // Order matters for deletion due to Foreign Keys!
   console.log('🧹 Clearing Database...');
-  await Promise.all([
+  await prisma.$transaction([
     prisma.comment.deleteMany(),
     prisma.post.deleteMany(),
     prisma.profile.deleteMany(),
