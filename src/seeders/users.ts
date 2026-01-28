@@ -28,4 +28,5 @@ export async function seedUsers() {
   } catch (error) {
     console.error('❌ Bulk Seed Failed:', error);
   }
+  
 }

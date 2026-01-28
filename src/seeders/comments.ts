@@ -23,4 +23,5 @@ export async function seedComments() {
     data: comments,
     skipDuplicates: true,
   });
+  
 }

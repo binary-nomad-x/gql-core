@@ -44,7 +44,6 @@ const categories = [
   { name: 'Gardening', short_description: 'Plants, landscaping, and urban farming' },
   { name: 'Logistics', short_description: 'Supply chain and global shipping' },
   { name: 'Journalism', short_description: 'Reporting, ethics, and media trends' }
-
 ];
 
 export async function seedCategories() {
