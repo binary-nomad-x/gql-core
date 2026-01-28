@@ -1,1 +1,0 @@
-console.log('salaam from main.ts file')
