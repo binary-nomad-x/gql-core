@@ -4,9 +4,11 @@ import { faker } from '@faker-js/faker'
 export const randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 // FIX: Added Non-null assertion (!) because we know our pools aren't empty
+
+// * finally typescript is making sense to me
 export const randomItem = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)]!;
 
-// Data Pools
+// Data Pools (muslim + non-muslims names seperate names, also muslim names men first name boy girl ka ho sakta hai, but last name hamesha male ka ho)
 const firstNames = ['Alex', 'Sarah', 'John', 'Emma', 'Mike', 'Linda', 'David', 'Sophia', 'James', 'Emily', 'Ahmed', 'Fatima'];
 const lastNames = ['Smith', 'Doe', 'Johnson', 'Brown', 'Williams', 'Garcia', 'Miller', 'Davis', 'Khan', 'Malik'];
 const domains = ['gmail.com', 'outlook.com', 'yahoo.com', 'example.com'];
