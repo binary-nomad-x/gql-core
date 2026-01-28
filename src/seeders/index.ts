@@ -1,4 +1,4 @@
-import { prisma } from '../db'; // Aapka shared instance
+import { prisma } from '../db'; // Aapka shared instance of prisma that should be needed everywhere to query the db
 import { performance } from 'perf_hooks';
 import { seedCategories } from './categories';
 import { seedUsers } from './users';

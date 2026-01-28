@@ -2,7 +2,10 @@
 import { PrismaClient } from '@prisma/client';
 import { generateNewsletter } from './lib';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient(); // the previous way
+
+import { prisma } from '../db';
+
 const NEWSLETTER_COUNT = 1000;
 
 export async function seedNewsletters() {

@@ -2,7 +2,10 @@
 import { PrismaClient } from '@prisma/client';
 import { generateComment, randomInt } from './lib';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient(); // the previous way
+
+import { prisma } from '../db';
+
 const COMMENT_COUNT = 3000;
 const USER_COUNT = 500;
 const POST_COUNT = 2000;
@@ -14,7 +17,7 @@ export async function seedComments() {
 
   for (let i = 0; i < COMMENT_COUNT; i++) {
     comments.push(generateComment(
-      randomInt(1, USER_COUNT), 
+      randomInt(1, USER_COUNT),
       randomInt(1, POST_COUNT)
     ));
   }
@@ -23,5 +26,5 @@ export async function seedComments() {
     data: comments,
     skipDuplicates: true,
   });
-  
+
 }

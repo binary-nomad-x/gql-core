@@ -1,7 +1,9 @@
 // src/seeders/categories.ts
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient(); // the previous way
+
+import { prisma } from '../db';
 
 const categories = [
   { name: 'Technology', short_description: 'Tech, coding, and hardware' },
