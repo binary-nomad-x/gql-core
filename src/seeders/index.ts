@@ -17,7 +17,7 @@ async function main() {
       prisma.comment.deleteMany(),
       prisma.post.deleteMany(),
       prisma.profile.deleteMany(),
-      prisma.user.deleteMany(),        // User baad mein kyunke Profile/Post is par depend karte hain
+      prisma.user.deleteMany(), // User baad mein kyunke Profile/Post is par depend karte hain
       prisma.category.deleteMany(),
       prisma.newsletter.deleteMany(),
     ]);
@@ -30,13 +30,15 @@ async function main() {
     console.log('Phase 2 👥: Seeding Users and Profiles...');
     await seedUsers();
 
-    // 4. Seed Relational Data in Parallel for Speed
-    console.log('Phase 3 ⚡: Seeding Posts, Comments, and Newsletters...');
-    await Promise.all([
-      seedPosts(),
-      seedComments(),
-      seedNewsletters(),
-    ]);
+    // 4. Seed Relational Data
+    console.log('Phase 3 ⚡: Seeding Posts...');
+    await seedPosts();
+
+    console.log('Phase 4 💬: Seeding Comments...');
+    await seedComments();
+
+    console.log('Phase 5 📧: Seeding Newsletters...');
+    await seedNewsletters();
 
     const end = performance.now();
     const duration = ((end - start) / 1000).toFixed(2);
