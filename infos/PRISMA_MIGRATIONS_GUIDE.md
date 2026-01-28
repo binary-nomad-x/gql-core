@@ -88,13 +88,22 @@ npx prisma migrate deploy
 
 ## 5. Troubleshooting Commands
 
-| Command | Usage |
-| --- | --- |
-| `npx prisma status` | Check if your database is in sync with your migrations. |
-| `npx prisma studio` | Open a visual editor to see your data and verify migrations. |
+| Command               | Usage                                                                      |
+| --------------------- | -------------------------------------------------------------------------- |
+| `npx prisma status`   | Check if your database is in sync with your migrations.                    |
+| `npx prisma studio`   | Open a visual editor to see your data and verify migrations.               |
 | `npx prisma generate` | Manually recreate the Prisma Client (run this if VS Code shows red lines). |
 
 ---
+
+
+## 6 . Another Reset thing 
+
+Sometimes the client is not loaded with all the relations the code have, migration, relations, resolvers etc
+
+`
+Remove-Item -Recurse -Force node_modules/.prisma; npx prisma generate
+`
 
 ## 💡 Pro Tip: The Shadow Database
 
