@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,18 +6,79 @@ datasource db {
   provider = "postgresql"
 }
 
+// 1. User Profile (One-to-One with User)
+model Profile {
+  id     Int     @id @default(autoincrement())
+  bio    String?
+  avatar String?
+  user   User    @relation(fields: [userId], references: [id])
+  userId Int     @unique
+}
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  age       Int?
+  role      Role     @default(USER) // Enum use kiya hai
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  posts    Post[]
+  profile  Profile?
+  comments Comment[]
+}
+
+// 2. Enum for User Roles
+enum Role {
+  USER
+  ADMIN
+  EDITOR
 }
 
 model Post {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   title     String
+  slug      String   @unique
   content   String?
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
+  published Boolean  @default(false)
+  viewCount Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
+
+  categories Category[] // Many-to-Many relationship
+  comments   Comment[]
 }
+
+model Category {
+  id                Int     @id @default(autoincrement())
+  name              String  @unique
+  short_description String?
+
+  posts Post[] // Many-to-Many relation automatically handle hogi
+}
+
+// 3. Comments (One-to-Many with User and Post)
+model Comment {
+  id        Int      @id @default(autoincrement())
+  text      String
+  createdAt DateTime @default(now())
+
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
+
+  post   Post @relation(fields: [postId], references: [id])
+  postId Int
+}
+
+// 4. Newsletter Subscription (Simple Standalone Table)
+model Newsletter {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  subscribedAt DateTime @default(now())
+}
+
+// npx prisma migrate dev --name expand_schema_with_relationships
