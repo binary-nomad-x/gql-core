@@ -15,4 +15,7 @@ export default defineConfig({
     // Agar env se nahi mil raha to wahi string jo aapne docker mein rakhi hai
     url: process.env.DATABASE_URL || "postgresql://postgres:password@localhost:5432/gql_core?schema=public",
   },
+  migrations: {
+    seed: 'tsx ./src/seeders/index.ts',
+  },
 });
