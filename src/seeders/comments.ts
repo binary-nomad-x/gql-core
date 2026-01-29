@@ -1,5 +1,4 @@
 // src/seeders/comments.ts
-import { PrismaClient } from '@prisma/client';
 import { generateComment, randomInt } from './lib';
 import { prisma } from '../db';
 

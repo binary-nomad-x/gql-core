@@ -11,13 +11,17 @@ async function main() {
   console.log('🚀 [IGNITION] Starting Blazing Fast Seed...');
 
   try {
+
+    // ORDER MATTERS (in deletion and insertion)
+
     // 1. Wipe DB in strict order (Child tables first, then Parent tables)
     console.log('Sweep 🧹: Clearing existing data...');
+
     await prisma.$transaction([
       prisma.comment.deleteMany(),
       prisma.post.deleteMany(),
       prisma.profile.deleteMany(),
-      prisma.user.deleteMany(), // User baad mein kyunke Profile/Post is par depend karte hain
+      prisma.user.deleteMany(),
       prisma.category.deleteMany(),
       prisma.newsletter.deleteMany(),
     ]);
