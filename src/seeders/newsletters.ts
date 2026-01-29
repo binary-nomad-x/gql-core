@@ -1,7 +1,4 @@
-// src/seeders/newsletters.ts
-import { PrismaClient } from '@prisma/client';
 import { generateNewsletter } from './lib';
-
 import { prisma } from '../db';
 
 const NEWSLETTER_COUNT = 1000;

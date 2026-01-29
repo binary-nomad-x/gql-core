@@ -16,9 +16,9 @@ async function startServer() {
       listen: { port: 4000 },
     });
     console.log(`
-🚀 Apollo Server Ready
-🌍 URL: ${url}
-🛠️  Mode: Development
+    🚀 Apollo Server Ready
+    🌍 URL: ${url}
+    🛠️  Mode: Development
     `);
   } catch (error) {
     console.error("💀 Startup Error:", error);

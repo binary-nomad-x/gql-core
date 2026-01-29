@@ -48,10 +48,10 @@ async function main() {
     const duration = ((end - start) / 1000).toFixed(2);
 
     console.log(`
-✅ ==========================================
-✅ Database Seeded Successfully!
-⏱️  Time taken: ${duration}s
-✅ ==========================================
+      ✅ ==========================================
+      ✅ Database Seeded Successfully!
+      ⏱️  Time taken: ${duration}s
+      ✅ ==========================================
     `);
   } catch (error) {
     console.error('❌ Critical Seeding Error:', error);

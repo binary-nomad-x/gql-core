@@ -1,4 +1,3 @@
-// src/seeders/comments.ts
 import { generateComment, randomInt } from './lib';
 import { prisma } from '../db';
 
