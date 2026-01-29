@@ -8,17 +8,64 @@ export const randomInt = (min: number, max: number) => Math.floor(Math.random() 
 // * finally typescript is making sense to me
 export const randomItem = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)]!;
 
-// Data Pools (muslim + non-muslims names seperate names, also muslim names men first name boy girl ka ho sakta hai, but last name hamesha male ka ho)
-const firstNames = ['Alex', 'Sarah', 'John', 'Emma', 'Mike', 'Linda', 'David', 'Sophia', 'James', 'Emily', 'Ahmed', 'Fatima'];
-const lastNames = ['Smith', 'Doe', 'Johnson', 'Brown', 'Williams', 'Garcia', 'Miller', 'Davis', 'Khan', 'Malik'];
+// Separate Muslim and Non-Muslim name pools
+// Muslim First Names - Boys first, then Girls
+const muslimBoyFirstNames = ['Ahmed', 'Mohammed', 'Ali', 'Hassan', 'Hussain', 'Omar', 'Yusuf', 'Ibrahim', 'Abdullah', 'Hamza', 'Bilal', 'Zain'];
+
+// Muslim First Names - Girls
+const muslimGirlFirstNames = ['Fatima', 'Aisha', 'Maryam', 'Zainab', 'Hafsa', 'Sumaya', 'Khadija', 'Asma', 'Amna', 'Sana', 'Hina', 'Noor'];
+
+// Non-Muslim First Names - Boys first, then Girls  
+const nonMuslimBoyFirstNames = ['Mike', 'Alex', 'John', 'David', 'James', 'Chris', 'Daniel', 'Ryan', 'Matthew', 'Andrew', 'Kevin', 'Steven'];
+
+// Non-Muslim First Names - Girls
+const nonMuslimGirlFirstNames = ['Sarah', 'Emma', 'Linda', 'Sophia', 'Emily', 'Anna', 'Jessica', 'Jennifer', 'Michelle', 'Lisa', 'Amy', 'Rachel'];
+
+// Muslim Last Names ONLY (for Muslim first names)
+const muslimLastNames = ['Khan', 'Malik', 'Ahmed', 'Raza', 'Shah', 'Siddiqui', 'Choudhary', 'Hussain', 'Patel', 'Iqbal', 'Mirza', 'Sheikh'];
+
+// Non-Muslim Last Names ONLY (for Non-Muslim first names)
+const nonMuslimLastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Wilson', 'Taylor', 'Anderson', 'Thomas'];
+
 const domains = ['gmail.com', 'outlook.com', 'yahoo.com', 'example.com'];
 const postTitles = ['Getting started with Prisma', 'Why TypeScript is the future', 'PostgreSQL vs MySQL', 'Top 10 coding habits'];
 const loremText = ['Lorem ipsum dolor sit amet...', 'Sed do eiusmod tempor...', 'Ut enim ad minim veniam...'];
 
+// Helper to pick first name based on gender and origin
+const getRandomFirstName = () => {
+  const isMuslim = randomInt(0, 1) === 1;
+  const isBoy = randomInt(0, 1) === 1;
+
+  if (isMuslim) {
+    return isBoy
+      ? randomItem(muslimBoyFirstNames)
+      : randomItem(muslimGirlFirstNames);
+  } else {
+    return isBoy
+      ? randomItem(nonMuslimBoyFirstNames)
+      : randomItem(nonMuslimGirlFirstNames);
+  }
+};
+
+// Helper to get matching last name based on first name origin
+const getMatchingLastName = (firstName: string): string => {
+  const isMuslim = muslimBoyFirstNames.includes(firstName) || muslimGirlFirstNames.includes(firstName);
+
+  let lastNames = isMuslim ? muslimLastNames : nonMuslimLastNames;
+  let lName = randomItem(lastNames);
+
+  // Ensure first and last names are never the same
+  while (firstName === lName) {
+    lName = randomItem(lastNames);
+  }
+
+  return lName;
+};
+
 export const generateUser = (id: number) => {
   // FIX: Using non-null assertion or checking against length properly
-  const fName = firstNames[id % firstNames.length]!;
-  const lName = lastNames[id % lastNames.length]!;
+  const fName = getRandomFirstName();
+  const lName = getMatchingLastName(fName);
 
   return {
     id, // Mandatory for bulk relation seeding
