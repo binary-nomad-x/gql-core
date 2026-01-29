@@ -81,4 +81,4 @@ model Newsletter {
   subscribedAt DateTime @default(now())
 }
 
-// npx prisma migrate dev --name expand_schema_with_relationships
+

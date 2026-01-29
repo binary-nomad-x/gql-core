@@ -105,6 +105,15 @@ Sometimes the client is not loaded with all the relations the code have, migrati
 Remove-Item -Recurse -Force node_modules/.prisma; npx prisma generate
 `
 
+## 7. Running a migration 
+
+`
+<!-- npx prisma migrate dev --name <migration_name> -->
+npx prisma migrate dev --name expand_schema_with_relationships
+`
+
+
+
 ## 💡 Pro Tip: The Shadow Database
 
 When you run `migrate dev`, Prisma creates a temporary "Shadow Database" on your PostgreSQL server. It uses this to "test" the migrations before applying them to your main database. This ensures your migration history is clean and consistent!
