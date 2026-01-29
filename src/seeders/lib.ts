@@ -16,41 +16,41 @@ const postTitles = ['Getting started with Prisma', 'Why TypeScript is the future
 const loremText = ['Lorem ipsum dolor sit amet...', 'Sed do eiusmod tempor...', 'Ut enim ad minim veniam...'];
 
 export const generateUser = (id: number) => {
-    // FIX: Using non-null assertion or checking against length properly
-    const fName = firstNames[id % firstNames.length]!;
-    const lName = lastNames[id % lastNames.length]!;
+  // FIX: Using non-null assertion or checking against length properly
+  const fName = firstNames[id % firstNames.length]!;
+  const lName = lastNames[id % lastNames.length]!;
 
-    return {
-        id, // Mandatory for bulk relation seeding
-        email: `${fName.toLowerCase()}.${lName.toLowerCase()}${id}@${domains[id % domains.length]}`,
-        name: `${fName} ${lName}`,
-        age: randomInt(18, 65),
-        // FIX: Cast string to Role Enum
-        role: (randomInt(0, 10) > 8 ? 'ADMIN' : 'USER') as Role,
-    };
+  return {
+    id, // Mandatory for bulk relation seeding
+    email: `${fName.toLowerCase()}.${lName.toLowerCase()}${id}@${domains[id % domains.length]}`,
+    name: `${fName} ${lName}`,
+    age: randomInt(18, 65),
+    // FIX: Cast string to Role Enum
+    role: (randomInt(0, 10) > 8 ? 'ADMIN' : 'USER') as Role,
+  };
 };
 
 export const generateProfile = (userId: number) => ({
-    userId,
-    bio: randomItem(['Senior Dev', 'Junior Dev', 'Tech Lead', 'Student', 'Freelancer']),
-    avatar: `https://i.pravatar.cc/150?u=${userId}`
+  userId,
+  bio: randomItem(['Senior Dev', 'Junior Dev', 'Tech Lead', 'Student', 'Freelancer']),
+  avatar: `https://i.pravatar.cc/150?u=${userId}`
 });
 
 export const generatePost = (authorId: number) => ({
-    authorId,
-    title: randomItem(postTitles),
-    slug: `post-${authorId}-${randomInt(1000, 9999)}`,
-    content: randomItem(loremText),
-    published: randomInt(0, 2) > 0,
-    viewCount: randomInt(0, 5000),
+  authorId,
+  title: randomItem(postTitles),
+  slug: `post-${authorId}-${randomInt(1000, 9999)}`,
+  content: randomItem(loremText),
+  published: randomInt(0, 2) > 0,
+  viewCount: randomInt(0, 5000),
 });
 
 export const generateComment = (authorId: number, postId: number) => ({
-    authorId,
-    postId,
-    text: randomItem(loremText),
+  authorId,
+  postId,
+  text: randomItem(loremText),
 });
 
 export const generateNewsletter = () => ({
-    email: `newsletter+${randomInt(10000, 99999)}@${randomItem(domains)}`,
+  email: `newsletter+${randomInt(10000, 99999)}@${randomItem(domains)}`,
 });
