@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-4 fw-bold text-dark">Welcome to the Cockpit</h1>
+            <p class="lead">Your multi-protocol backend is running smoothly.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <h2 class="text-primary">
+                    <%= stats.users %>
+                </h2>
+                <p class="mb-0">Total Users</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <h2 class="text-success">
+                    <%= stats.posts %>
+                </h2>
+                <p class="mb-0">Blog Posts</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <h2 class="text-info">
+                    <%= stats.products %>
+                </h2>
+                <p class="mb-0">Products in Inventory</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h3>Available Endpoints</h3>
+            <ul class="list-group">
+                <li class="list-group-item"><code>GET /api/posts</code> - JSON list</li>
+                <li class="list-group-item"><code>GET /graphql</code> - Interactive API</li>
+                <li class="list-group-item"><code>GET /posts</code> - HTML View</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3>Quick Links</h3>
+            <div class="d-grid gap-2">
+                <a href="/posts" class="btn btn-outline-primary">View Post Listing</a>
+                <a href="/graphql" target="_blank" class="btn btn-outline-dark">Open GraphQL Studio</a>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>

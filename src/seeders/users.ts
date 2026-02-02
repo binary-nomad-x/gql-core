@@ -1,35 +1,32 @@
 import { Prisma } from '@prisma/client';
 import { generateUser, generateProfile } from './lib';
 import { prisma } from '../db';
+import * as cliProgress from 'cli-progress';
 
 const USER_COUNT = 500;
 
-/**
- * Seeds Users and their corresponding Profiles.
- * Uses a transaction for atomicity and speed.
- */
 export async function seedUsers() {
   console.log(`🚀 Seeding ${USER_COUNT} Users & Profiles...`);
 
-  // 1. Generate User Data
-  // We use IDs starting from 1 for easier relation mapping in other seeders if needed
-  const users: Prisma.UserCreateManyInput[] = Array.from({ length: USER_COUNT }).map((_, i) =>
-    generateUser(i + 1)
-  );
+  const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+  bar.start(USER_COUNT, 0);
 
-  // 2. Generate Profile Data
-  const profiles: Prisma.ProfileCreateManyInput[] = Array.from({ length: USER_COUNT }).map((_, i) =>
-    generateProfile(i + 1)
-  );
+  const users: Prisma.UserCreateManyInput[] = [];
+  const profiles: Prisma.ProfileCreateManyInput[] = [];
 
-  // 3. Batch Insert using Transaction
-  // prisma.$transaction ensures that either both steps succeed or both fail.
+  for (let i = 0; i < USER_COUNT; i++) {
+    users.push(generateUser(i + 1));
+    profiles.push(generateProfile(i + 1));
+    bar.update(i + 1);
+  }
+  bar.stop();
+
   try {
     await prisma.$transaction([
       prisma.user.createMany({ data: users, skipDuplicates: true }),
       prisma.profile.createMany({ data: profiles, skipDuplicates: true }),
     ]);
-    console.log(`✅ ${USER_COUNT} Users and Profiles seeded successfully!`);
+    console.log(`✅ Users and Profiles batch seeded!`);
   } catch (error) {
     console.error('❌ User/Profile seeding failed:', error);
     throw error;

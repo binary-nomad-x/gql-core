@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+    <h2>
+        <%= title %>
+    </h2>
+    <p class="text-muted">Displaying latest 10 posts from Postgres</p>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Published</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% posts.forEach(post=> { %>
+                    <tr>
+                        <td><strong>
+                                <%= post.title %>
+                            </strong></td>
+                        <td>
+                            <%= post.author.name %>
+                        </td>
+                        <td>
+                            <% if(post.published) { %>
+                                <span class="badge bg-success">Yes</span>
+                                <% } else { %>
+                                    <span class="badge bg-secondary">Draft</span>
+                                    <% } %>
+                        </td>
+                        <td>⭐ <%= post.rating || 'N/A' %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <%- include('partials/footer') %>

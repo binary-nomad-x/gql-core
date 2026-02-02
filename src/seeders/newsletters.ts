@@ -1,22 +1,29 @@
 import { generateNewsletter } from './lib';
 import { prisma } from '../db';
+import * as cliProgress from 'cli-progress';
 
 const NEWSLETTER_COUNT = 1000;
 
 /**
- * Seeds newsletter subscriptions.
+ * Seeds newsletter subscriptions with a progress bar.
  */
 export async function seedNewsletters() {
-  console.log(`📧 Seeding ${NEWSLETTER_COUNT} Newsletter subscriptions...`);
+  console.log(`📧 Seeding ${NEWSLETTER_COUNT} Newsletters...`);
 
-  // Generate data in memory first
-  const emails = Array.from({ length: NEWSLETTER_COUNT }).map(() => generateNewsletter());
+  const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+  bar.start(NEWSLETTER_COUNT, 0);
 
-  // Bulk creation for speed
+  const emails = [];
+  for (let i = 0; i < NEWSLETTER_COUNT; i++) {
+    emails.push(generateNewsletter());
+    bar.update(i + 1);
+  }
+  bar.stop();
+
   await prisma.newsletter.createMany({
     data: emails,
     skipDuplicates: true,
   });
 
-  console.log(`✅ ${NEWSLETTER_COUNT} Newsletter subscriptions seeded!`);
+  console.log(`✅ Newsletters seeded successfully!`);
 }

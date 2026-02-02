@@ -16,13 +16,16 @@ model Profile {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  age       Int?
-  role      Role     @default(USER) // Enum use kiya hai
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  name       String?
+  age        Int?
+  role       Role     @default(USER)
+  isVerified Boolean  @default(false)
+  metadata   Json? // JSON type for flexibility
+  lastLogin  DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   posts    Post[]
   profile  Profile?
@@ -43,15 +46,23 @@ model Post {
   content   String?
   published Boolean  @default(false)
   viewCount Int      @default(0)
+  rating    Decimal? @db.Decimal(3, 2) // Precision and scale
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   author   User @relation(fields: [authorId], references: [id])
   authorId Int
 
-  categories     Category[] // Many-to-Many relationship
+  categories     Category[] // Implicit Many-to-Many
   comments       Comment[]
-  postCategories PostCategory[]
+  postCategories PostCategory[] // Explicit mapping
+  tags           Tag[] @relation("PostTags")
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  posts Post[] @relation("PostTags")
 }
 
 model Category {
@@ -59,8 +70,20 @@ model Category {
   name              String  @unique
   short_description String?
 
-  posts          Post[] // Many-to-Many relation automatically handle hogi
+  posts          Post[]
   postCategories PostCategory[]
+}
+
+// Explicit model for pivot for post categories
+model PostCategory {
+  categoryId Int @map("category_id")
+  postId     Int @map("post_id")
+
+  category Category @relation(fields: [categoryId], references: [id])
+  post     Post     @relation(fields: [postId], references: [id])
+
+  @@id([categoryId, postId])
+  @@map("post_categories")
 }
 
 // 3. Comments (One-to-Many with User and Post)
@@ -76,21 +99,30 @@ model Comment {
   postId Int
 }
 
-// 4. Newsletter Subscription (Simple Standalone Table)
+// 4. Newsletter Subscription
 model Newsletter {
   id           Int      @id @default(autoincrement())
   email        String   @unique
   subscribedAt DateTime @default(now())
 }
 
-// explicit model for pivot for post categories
-model PostCategory {
-  categoryId Int @map("category_id")
-  postId     Int @map("post_id")
-
-  category Category @relation(fields: [categoryId], references: [id])
-  post     Post     @relation(fields: [postId], references: [id])
-
-  @@id([categoryId, postId])
-  @@map("post_categories") // this line connect model to table
+// 5. Products (E-commerce example for variety)
+model Product {
+  id          Int      @id @default(autoincrement())
+  sku         String   @unique
+  name        String
+  description String?
+  price       Decimal  @db.Decimal(10, 2)
+  stock       Int      @default(0)
+  attributes  Json? // For dynamic product specs
+  status      ProductStatus @default(ACTIVE)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+  OUT_OF_STOCK
+}
+
