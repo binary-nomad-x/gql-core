@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "node -r dotenv/config -r tsx/cjs src/index.ts",
     "studio": "npx prisma studio",
-    "seed": "npx prisma db seed"
+    "seed": "npx prisma db seed",
+    "migrate:create-only": "npx prisma migrate dev --create-only --name ",
+    "migrate:dev": "npx prisma migrate dev",
+    "migrate:deploy": "npx prisma migrate deploy",
+    "migrate:reset": "npx prisma migrate reset"
   },
   "prisma": {
     "seed": "tsx src/seeders/seed.ts"
