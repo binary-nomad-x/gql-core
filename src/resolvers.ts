@@ -15,11 +15,15 @@ export const resolvers = {
     posts: (_: any, { take = 20, skip = 0 }: { take: number, skip: number }) => prisma.post.findMany({
       take,
       skip,
-      include: { author: true, categories: true, tags: true }
+      include: {
+        author: true,
+        categories: { include: { category: true } },
+        tags: true
+      }
     }),
 
     categories: () => prisma.category.findMany({
-      include: { posts: true }
+      include: { posts: { include: { post: true } } }
     }),
 
     products: (_: any, { status }: { status?: ProductStatus }) => prisma.product.findMany({

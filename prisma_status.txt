@@ -1,0 +1,14 @@
+[dotenv@17.2.3] injecting env (1) from .env -- tip: ≡ƒæÑ sync secrets across teammates & machines: https://dotenvx.com/ops
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma\schema.prisma.
+Datasource "db": PostgreSQL database "gql_core", schema "public" at "localhost:5432"
+
+3 migrations found in prisma/migrations
+Following migrations have not yet been applied:
+20260127192843_init
+20260128132941_expand_schema_with_relationships
+20260202142519_update_post_categories_pivot_table_to_meaningful
+
+To apply migrations in development run prisma migrate dev.
+To apply migrations in production run prisma migrate deploy.

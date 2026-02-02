@@ -1,0 +1,36 @@
+
+> gql-core@1.0.0 dev
+> tsx watch src/index.ts
+
+
+      ≡ƒÜÇ Server is running!
+      ≡ƒîÉ Home Dashboard: http://localhost:4000
+      ≡ƒôí REST API:      http://localhost:4000/api/posts
+      ≡ƒöì GraphQL:       http://localhost:4000/graphql
+    
+12:37:13 AM [tsx] change in ./src\services\post.service.ts Rerunning...
+c
+      ≡ƒÜÇ Server is running!
+      ≡ƒîÉ Home Dashboard: http://localhost:4000
+      ≡ƒôí REST API:      http://localhost:4000/api/posts
+      ≡ƒöì GraphQL:       http://localhost:4000/graphql
+    
+12:38:09 AM [tsx] change in ./src\resolvers.ts Rerunning...
+c
+      ≡ƒÜÇ Server is running!
+      ≡ƒîÉ Home Dashboard: http://localhost:4000
+      ≡ƒôí REST API:      http://localhost:4000/api/posts
+      ≡ƒöì GraphQL:       http://localhost:4000/graphql
+    
+prisma:query SELECT "public"."Post"."id", "public"."Post"."title", "public"."Post"."slug", "public"."Post"."content", "public"."Post"."published", "public"."Post"."viewCount", "public"."Post"."rating", "public"."Post"."createdAt", "public"."Post"."updatedAt", "public"."Post"."authorId" FROM "public"."Post" WHERE 1=1 ORDER BY "public"."Post"."createdAt" DESC LIMIT $1 OFFSET $2
+prisma:query SELECT "public"."User"."id", "public"."User"."email", "public"."User"."name", "public"."User"."age", "public"."User"."role"::text, "public"."User"."isVerified", "public"."User"."metadata", "public"."User"."lastLogin", "public"."User"."createdAt", "public"."User"."updatedAt" FROM "public"."User" WHERE "public"."User"."id" IN ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20) OFFSET $21
+prisma:query SELECT "public"."post_categories"."category_id", "public"."post_categories"."post_id" FROM "public"."post_categories" WHERE "public"."post_categories"."post_id" IN ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20) OFFSET $21
+prisma:query SELECT "public"."Tag"."id", "public"."Tag"."name", "t0"."A" AS "PostTags@Post" FROM "public"."Tag" INNER JOIN "public"."_PostTags" AS "t0" ON "t0"."B" = "public"."Tag"."id" WHERE (1=1 AND "t0"."A" IN ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)) OFFSET $21
+prisma:query SELECT "public"."Category"."id", "public"."Category"."name", "public"."Category"."short_description" FROM "public"."Category" WHERE "public"."Category"."id" IN ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29,$30,$31,$32,$33,$34,$35,$36,$37,$38,$39,$40,$41,$42,$43,$44,$45,$46,$47,$48) OFFSET $49
+12:41:37 AM [tsx] change in ./src\services\post.service.ts Restarting...
+c
+      ≡ƒÜÇ Server is running!
+      ≡ƒîÉ Home Dashboard: http://localhost:4000
+      ≡ƒôí REST API:      http://localhost:4000/api/posts
+      ≡ƒöì GraphQL:       http://localhost:4000/graphql
+    

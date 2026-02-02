@@ -1,0 +1,8 @@
+src/resolvers.ts(25,91): error TS2379: Argument of type '{ where: { status: $Enums.ProductStatus; } | undefined; }' is not assignable to parameter of type '{ select?: ProductSelect<DefaultArgs> | null; omit?: ProductOmit<DefaultArgs> | null; where?: ProductWhereInput; ... 4 more ...; distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'where' are incompatible.
+    Type '{ status: ProductStatus; } | undefined' is not assignable to type 'ProductWhereInput'.
+      Type 'undefined' is not assignable to type 'ProductWhereInput'.
+src/services/post.service.ts(11,37): error TS2379: Argument of type '{ skip: number | undefined; take: number | undefined; where: { OR: ({ title: { contains: string; mode: "insensitive"; }; } | { content: { contains: string; mode: "insensitive"; }; })[]; } | undefined; include: { ...; }; orderBy: { ...; }; }' is not assignable to parameter of type '{ select?: PostSelect<DefaultArgs> | null; omit?: PostOmit<DefaultArgs> | null; include?: PostInclude<DefaultArgs> | null; ... 5 more ...; distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'where' are incompatible.
+    Type '{ OR: ({ title: { contains: string; mode: "insensitive"; }; } | { content: { contains: string; mode: "insensitive"; }; })[]; } | undefined' is not assignable to type 'PostWhereInput'.
+      Type 'undefined' is not assignable to type 'PostWhereInput'.
