@@ -1,5 +1,8 @@
 -- This is an empty migration.
 
+-- 0 - Drop the previous table if exists
+DROP TABLE IF EXISTS "_CategoryToPost";
+
 -- 1. Table ka naam badalna (_CategoryToPost -> post_categories)
 ALTER TABLE "_CategoryToPost" RENAME TO "post_categories";
 
