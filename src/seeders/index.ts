@@ -5,6 +5,7 @@ import { seedUsers } from './users';
 import { seedPosts } from './posts';
 import { seedComments } from './comments';
 import { seedNewsletters } from './newsletters';
+import { truncateTables } from '../helpers/shared';
 
 async function main() {
   const start = performance.now();
@@ -17,14 +18,7 @@ async function main() {
     // 1. Wipe DB in strict order (Child tables first, then Parent tables)
     console.log('Sweep 🧹: Clearing existing data...');
 
-    await prisma.$transaction([
-      prisma.comment.deleteMany(),
-      prisma.post.deleteMany(),
-      prisma.profile.deleteMany(),
-      prisma.user.deleteMany(),
-      prisma.category.deleteMany(),
-      prisma.newsletter.deleteMany(),
-    ]);
+    truncateTables()
 
     // 2. Seed Independent Data
     console.log('Phase 1 🏗️: Seeding Categories...');
