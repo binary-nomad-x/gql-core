@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node -r dotenv/config -r tsx/cjs src/index.ts",
-    "studio": "npx prisma studio",
-    "seed": "npx prisma db seed",
-    "migrate:create-only": "npx prisma migrate dev --create-only --name ",
-    "migrate:dev": "npx prisma migrate dev",
-    "migrate:deploy": "npx prisma migrate deploy",
-    "migrate:reset": "npx prisma migrate reset"
+    "dev": "tsx watch src/index.ts",
+    "studio": "prisma studio",
+    "db:seed": "prisma db seed",
+    "db:pull": "prisma db pull",
+    "db:gen": "prisma generate",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:create": "prisma migrate dev --create-only --name",
+    "migrate:deploy": "prisma migrate deploy",
+    "migrate:reset": "prisma migrate reset",
+    "postinstall": "npm run db:gen"
   },
   "prisma": {
     "seed": "tsx src/seeders/seed.ts"

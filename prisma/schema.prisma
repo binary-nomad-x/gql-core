@@ -49,8 +49,9 @@ model Post {
   author   User @relation(fields: [authorId], references: [id])
   authorId Int
 
-  categories Category[] // Many-to-Many relationship
-  comments   Comment[]
+  categories     Category[] // Many-to-Many relationship
+  comments       Comment[]
+  postCategories PostCategory[]
 }
 
 model Category {
@@ -58,7 +59,8 @@ model Category {
   name              String  @unique
   short_description String?
 
-  posts Post[] // Many-to-Many relation automatically handle hogi
+  posts          Post[] // Many-to-Many relation automatically handle hogi
+  postCategories PostCategory[]
 }
 
 // 3. Comments (One-to-Many with User and Post)
@@ -81,4 +83,14 @@ model Newsletter {
   subscribedAt DateTime @default(now())
 }
 
+// explicit model for pivot for post categories
+model PostCategory {
+  categoryId Int @map("category_id")
+  postId     Int @map("post_id")
 
+  category Category @relation(fields: [categoryId], references: [id])
+  post     Post     @relation(fields: [postId], references: [id])
+
+  @@id([categoryId, postId])
+  @@map("post_categories") // this line connect model to table
+}
