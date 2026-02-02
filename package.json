@@ -4,10 +4,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "node -r dotenv/config -r tsx/cjs src/index.ts",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "seed": "npx prisma db seed"
   },
   "prisma": {
-    "seed": "tsx src/seeders/index.ts"
+    "seed": "tsx src/seeders/seed.ts"
   },
   "keywords": [],
   "author": "",
