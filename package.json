@@ -8,6 +8,7 @@
     "db:seed": "prisma db seed",
     "db:pull": "prisma db pull",
     "db:gen": "prisma generate",
+    "db:push": "prisma db push",
     "migrate:dev": "prisma migrate dev",
     "migrate:create": "prisma migrate dev --create-only --name",
     "migrate:deploy": "prisma migrate deploy",
@@ -15,7 +16,7 @@
     "postinstall": "npm run db:gen"
   },
   "prisma": {
-    "seed": "tsx src/seeders/seed.ts"
+    "seed": "tsx src/seeders/index.ts"
   },
   "keywords": [],
   "author": "",

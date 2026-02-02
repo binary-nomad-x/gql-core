@@ -3,16 +3,20 @@ import { prisma } from '../db';
 
 const NEWSLETTER_COUNT = 1000;
 
+/**
+ * Seeds newsletter subscriptions.
+ */
 export async function seedNewsletters() {
-  console.log(`📧 Seeding ${NEWSLETTER_COUNT} Newsletters...`);
+  console.log(`📧 Seeding ${NEWSLETTER_COUNT} Newsletter subscriptions...`);
 
-  const emails = [];
-  for (let i = 0; i < NEWSLETTER_COUNT; i++) {
-    emails.push(generateNewsletter());
-  }
+  // Generate data in memory first
+  const emails = Array.from({ length: NEWSLETTER_COUNT }).map(() => generateNewsletter());
 
+  // Bulk creation for speed
   await prisma.newsletter.createMany({
     data: emails,
     skipDuplicates: true,
   });
+
+  console.log(`✅ ${NEWSLETTER_COUNT} Newsletter subscriptions seeded!`);
 }
