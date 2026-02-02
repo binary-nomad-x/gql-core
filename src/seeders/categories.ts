@@ -12,5 +12,6 @@ export async function seedCategories() {
     skipDuplicates: true,
   });
 
-  console.log(`✅ Categories seeded successfully!`);
+  console.log(`✅ ${categories.length} categories seeded successfully!`);
+
 }

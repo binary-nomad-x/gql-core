@@ -8,9 +8,10 @@ export async function seedPosts() {
   console.log(`📝 Seeding ${POST_COUNT} Posts...`);
 
   // 1. Fetch IDs
-  const userIds = (await prisma.user.findMany({ select: { id: true } })).map(u => u.id);
-  const categoryIds = (await prisma.category.findMany({ select: { id: true } })).map(c => c.id);
-  const tagIds = (await prisma.tag.findMany({ select: { id: true } })).map(t => t.id);
+  const userIds = (await prisma.user.findMany({ select: { id: true } })).map((u: { id: number }) => u.id);
+  const categoryIds = (await prisma.category.findMany({ select: { id: true } })).map((c: { id: number }) => c.id);
+  const tagIds = (await prisma.tag.findMany({ select: { id: true } })).map((t: { id: number }) => t.id);
+
 
   if (userIds.length === 0 || categoryIds.length === 0) {
     console.error("❌ Please seed Users and Categories first!");

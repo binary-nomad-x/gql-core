@@ -1,6 +1,5 @@
 import express from 'express';
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServer, HeaderMap } from '@apollo/server';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import cors from 'cors';
 import path from 'path';
@@ -33,8 +32,54 @@ async function bootstrap() {
   await server.start();
 
   // 4. Mount Routes
-  // GraphQL
-  app.use('/graphql', expressMiddleware(server) as any);
+
+  // Custom GraphQL Middleware (replacing missing expressMiddleware)
+  app.get('/graphql', async (req, res) => {
+    // Show GraphQL Playground/Landing Page on GET
+    const httpGraphQLResponse = await server.executeHTTPGraphQLRequest({
+      httpGraphQLRequest: {
+        method: 'GET',
+        headers: new HeaderMap(Object.entries(req.headers) as any),
+        body: {},
+        search: req.url.split('?')[1] || '',
+      },
+      context: async () => ({ req, res }),
+    });
+    for (const [key, value] of httpGraphQLResponse.headers) res.setHeader(key, value);
+    if (httpGraphQLResponse.body.kind === 'complete') res.send(httpGraphQLResponse.body.string);
+    else res.end();
+  });
+
+  app.post('/graphql', async (req, res) => {
+    try {
+      const httpGraphQLResponse = await server.executeHTTPGraphQLRequest({
+        httpGraphQLRequest: {
+          method: 'POST',
+          headers: new HeaderMap(Object.entries(req.headers) as any),
+          body: req.body,
+          search: req.url.split('?')[1] || '',
+        },
+        context: async () => ({ req, res }),
+      });
+
+      for (const [key, value] of httpGraphQLResponse.headers) {
+        res.setHeader(key, value);
+      }
+      res.status(httpGraphQLResponse.status || 200);
+
+      if (httpGraphQLResponse.body.kind === 'complete') {
+        res.send(httpGraphQLResponse.body.string);
+      } else {
+        for await (const chunk of httpGraphQLResponse.body.asyncIterator) {
+          res.write(chunk);
+        }
+        res.end();
+      }
+    } catch (error) {
+      console.error("GraphQL Error:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
 
   // REST API
   app.use('/api/posts', postRoutes);

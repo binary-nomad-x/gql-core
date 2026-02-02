@@ -8,9 +8,10 @@ export async function seedTags() {
     console.log(`🏷️ Seeding ${tags.length} Tags...`);
 
     await prisma.tag.createMany({
-        data: tags.map(name => ({ name })),
+        data: tags.map((name: string) => ({ name })),
         skipDuplicates: true,
     });
+
 
     console.log(`✅ ${tags.length} tags seeded!`);
 }
