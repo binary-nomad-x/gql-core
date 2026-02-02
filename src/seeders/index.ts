@@ -17,8 +17,7 @@ async function main() {
 
     // 1. Wipe DB in strict order (Child tables first, then Parent tables)
     console.log('Sweep 🧹: Clearing existing data...');
-
-    truncateTables()
+    await truncateTables()
 
     // 2. Seed Independent Data
     console.log('Phase 1 🏗️: Seeding Categories...');
