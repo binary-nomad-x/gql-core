@@ -1,8 +1,5 @@
 -- This is an empty migration.
 
--- 0 - Drop the previous table if exists
-DROP TABLE IF EXISTS "_CategoryToPost";
-
 -- 1. Table ka naam badalna (_CategoryToPost -> post_categories)
 ALTER TABLE "_CategoryToPost" RENAME TO "post_categories";
 
@@ -19,3 +16,5 @@ ALTER INDEX "_CategoryToPost_B_index" RENAME TO "post_categories_post_id_idx";
 -- 5. Foreign Keys ko rename karna taake professional lagein
 ALTER TABLE "post_categories" RENAME CONSTRAINT "_CategoryToPost_A_fkey" TO "post_categories_category_id_fkey";
 ALTER TABLE "post_categories" RENAME CONSTRAINT "_CategoryToPost_B_fkey" TO "post_categories_post_id_fkey";
+
+
