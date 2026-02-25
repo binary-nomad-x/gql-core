@@ -10,7 +10,7 @@ export class PostController {
     try {
       const skip = Number(req.query.skip) || 0;
       const take = Number(req.query.take) || 20;
-      const search = req.query.search as string;
+      const search = req.query.string as string;
 
       const posts = await PostService.getAllPosts({ skip, take, search });
       res.json(posts);

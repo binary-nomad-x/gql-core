@@ -12,6 +12,5 @@ export async function seedTags() {
     skipDuplicates: true,
   });
 
-
   console.log(`✅ ${tags.length} tags seeded!`);
 }
