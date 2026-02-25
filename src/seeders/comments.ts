@@ -7,8 +7,12 @@ const COMMENT_COUNT = 3000;
 export async function seedComments() {
   console.log(`💬 Seeding ${COMMENT_COUNT} Comments...`);
 
-  const userIds = (await prisma.user.findMany({ select: { id: true } })).map(u => u.id);
-  const postIds = (await prisma.post.findMany({ select: { id: true } })).map(p => p.id);
+  const userIds = (await prisma.user.findMany({ select: { id: true } })).map(
+    (u) => u.id
+  );
+  const postIds = (await prisma.post.findMany({ select: { id: true } })).map(
+    (p) => p.id
+  );
 
   if (userIds.length === 0 || postIds.length === 0) {
     console.error('❌ No users or posts found!');
@@ -23,7 +27,7 @@ export async function seedComments() {
     comments.push({
       authorId: randomItem(userIds),
       postId: randomItem(postIds),
-      text: randomItem(loremText)
+      text: randomItem(loremText),
     });
     bar.update(i + 1);
   }

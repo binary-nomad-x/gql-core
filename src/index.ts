@@ -45,8 +45,10 @@ async function bootstrap() {
       },
       context: async () => ({ req, res }),
     });
-    for (const [key, value] of httpGraphQLResponse.headers) res.setHeader(key, value);
-    if (httpGraphQLResponse.body.kind === 'complete') res.send(httpGraphQLResponse.body.string);
+    for (const [key, value] of httpGraphQLResponse.headers)
+      res.setHeader(key, value);
+    if (httpGraphQLResponse.body.kind === 'complete')
+      res.send(httpGraphQLResponse.body.string);
     else res.end();
   });
 
@@ -76,8 +78,8 @@ async function bootstrap() {
         res.end();
       }
     } catch (error) {
-      console.error("GraphQL Error:", error);
-      res.status(500).send("Internal Server Error");
+      console.error('GraphQL Error:', error);
+      res.status(500).send('Internal Server Error');
     }
   });
 
@@ -99,6 +101,6 @@ async function bootstrap() {
   });
 }
 
-bootstrap().catch(err => {
-  console.error("💀 Startup Error:", err);
+bootstrap().catch((err) => {
+  console.error('💀 Startup Error:', err);
 });

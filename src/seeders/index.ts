@@ -23,7 +23,9 @@ async function main() {
     await truncateTables();
 
     // 2. INDEPENDENT TABLES
-    console.log('\n🏗️ Step 1: Seeding Independent Tables (Categories, Tags, Newsletters, Products)...');
+    console.log(
+      '\n🏗️ Step 1: Seeding Independent Tables (Categories, Tags, Newsletters, Products)...'
+    );
     await seedCategories();
     await seedTags();
     await seedNewsletters();

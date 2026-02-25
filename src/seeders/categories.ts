@@ -13,5 +13,4 @@ export async function seedCategories() {
   });
 
   console.log(`✅ ${categories.length} categories seeded successfully!`);
-
 }

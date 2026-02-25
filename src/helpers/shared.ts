@@ -2,10 +2,10 @@ import { prisma } from '../db';
 
 /**
  * **Truncates all PostgreSQL tables** in the `public` schema (except protected ones).
- * 
+ *
  * ## ✨ **Key Features**
  * - 🔄 **RESTART IDENTITY** - Resets all auto-increment IDs back to `1`
- * - 🔗 **CASCADE** - Automatically handles foreign key dependencies  
+ * - 🔗 **CASCADE** - Automatically handles foreign key dependencies
  * - 🛡️ **Prisma-safe** - Excludes `_prisma_migrations` table automatically
  * - ✅ **Type-safe** - Full TypeScript support with proper generics
  *
@@ -13,10 +13,10 @@ import { prisma } from '../db';
  * ```ts
  * // Clean ENTIRE database (except Prisma migrations)
  * await truncateTables();
- * 
+ *
  * // Protect specific tables
  * await truncateTables(['User', 'Session']);
- * 
+ *
  * ```
  *
  * ## ⚠️ **Safety Notes**
@@ -36,8 +36,8 @@ export async function truncateTables(skipTables: string[] = []): Promise<void> {
 
     // 2. 📋 Fetch all public schema tables
     const tables: { tablename: string }[] = await prisma.$queryRawUnsafe(`
-      SELECT tablename 
-      FROM pg_catalog.pg_tables 
+      SELECT tablename
+      FROM pg_catalog.pg_tables
       WHERE schemaname = 'public'
     `);
 
@@ -53,11 +53,14 @@ export async function truncateTables(skipTables: string[] = []): Promise<void> {
     }
 
     // 4. 💥 Execute mass TRUNCATE with identity reset
-    await prisma.$executeRawUnsafe(`TRUNCATE TABLE ${tableNames} RESTART IDENTITY CASCADE;`);
-    
-    console.log(`✅ SUCCESS: Cleared ${tables.length - allExclusions.length} tables`);
-    console.log(`📋 Tables truncated: ${tableNames}`);
+    await prisma.$executeRawUnsafe(
+      `TRUNCATE TABLE ${tableNames} RESTART IDENTITY CASCADE;`
+    );
 
+    console.log(
+      `✅ SUCCESS: Cleared ${tables.length - allExclusions.length} tables`
+    );
+    console.log(`📋 Tables truncated: ${tableNames}`);
   } catch (error) {
     console.error('❌ TRUNCATE FAILED:', error);
     throw error; // Re-throw for proper error handling

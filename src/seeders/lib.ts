@@ -1,5 +1,11 @@
 import { Role, ProductStatus } from '@prisma/client';
-import { muslimBoyFirstNames, nonMuslimBoyFirstNames, nonMuslimGirlFirstNames, muslimLastNames, nonMuslimLastNames } from '../data/names';
+import {
+  muslimBoyFirstNames,
+  nonMuslimBoyFirstNames,
+  nonMuslimGirlFirstNames,
+  muslimLastNames,
+  nonMuslimLastNames,
+} from '../data/names';
 import { domains, postTitles, loremText } from '../data/content';
 
 export { loremText };
@@ -7,12 +13,14 @@ export { loremText };
 /**
  * Utility to generate a random integer between min and max (inclusive).
  */
-export const randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
+export const randomInt = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
 
 /**
  * Utility to pick a random item from an array.
  */
-export const randomItem = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)]!;
+export const randomItem = <T>(arr: T[]): T =>
+  arr[Math.floor(Math.random() * arr.length)]!;
 
 /**
  * Utility to pick multiple random unique items from an array.
@@ -39,7 +47,9 @@ const getRandomFirstName = () => {
 };
 
 const getMatchingLastName = (firstName: string): string => {
-  const isMuslim = muslimBoyFirstNames.includes(firstName) || nonMuslimGirlFirstNames.includes(firstName);
+  const isMuslim =
+    muslimBoyFirstNames.includes(firstName) ||
+    nonMuslimGirlFirstNames.includes(firstName);
   let lastNames = isMuslim ? muslimLastNames : nonMuslimLastNames;
   let lName = randomItem(lastNames);
   while (firstName === lName) {
@@ -66,15 +76,23 @@ export const generateUser = (id: number) => {
     metadata: {
       loginCount: randomInt(1, 100),
       preferredTheme: randomItem(['dark', 'light', 'system']),
-      newsletterSubscribed: randomInt(0, 1) === 1
-    }
+      newsletterSubscribed: randomInt(0, 1) === 1,
+    },
   };
 };
 
 export const generateProfile = (userId: number) => ({
   userId,
-  bio: randomItem(['Senior Dev', 'Junior Dev', 'Tech Lead', 'Student', 'Freelancer', 'Open Source Contributor', 'GraphQL Enthusiast']),
-  avatar: `https://i.pravatar.cc/150?u=${userId}`
+  bio: randomItem([
+    'Senior Dev',
+    'Junior Dev',
+    'Tech Lead',
+    'Student',
+    'Freelancer',
+    'Open Source Contributor',
+    'GraphQL Enthusiast',
+  ]),
+  avatar: `https://i.pravatar.cc/150?u=${userId}`,
 });
 
 /**
@@ -116,11 +134,21 @@ export const generateProduct = (index: number) => ({
   attributes: {
     color: randomItem(['Black', 'White', 'Space Gray', 'Midnight']),
     warranty: `${randomInt(1, 3)} years`,
-    weight: `${randomInt(100, 2000)}g`
-  }
+    weight: `${randomInt(100, 2000)}g`,
+  },
 });
 
 export const tags = [
-  'React', 'NodeJS', 'GraphQL', 'Prisma', 'PostgreSQL', 'TypeScript',
-  'WebDev', 'Backend', 'Frontend', 'Database', 'Cloud', 'DevOps'
+  'React',
+  'NodeJS',
+  'GraphQL',
+  'Prisma',
+  'PostgreSQL',
+  'TypeScript',
+  'WebDev',
+  'Backend',
+  'Frontend',
+  'Database',
+  'Cloud',
+  'DevOps',
 ];

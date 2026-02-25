@@ -6,25 +6,31 @@ import { Prisma } from '@prisma/client';
  * This is where we write reusable logic that controllers can call.
  */
 export class PostService {
-  static async getAllPosts(params: { skip?: number; take?: number; search?: string }) {
+  static async getAllPosts(params: {
+    skip?: number;
+    take?: number;
+    search?: string;
+  }) {
     const { skip, take, search } = params;
     return prisma.post.findMany({
       skip,
       take,
-      where: search ? {
-        OR: [
-          { title: { contains: search, mode: 'insensitive' } },
-          { content: { contains: search, mode: 'insensitive' } }
-        ]
-      } : undefined,
+      where: search
+        ? {
+            OR: [
+              { title: { contains: search, mode: 'insensitive' } },
+              { content: { contains: search, mode: 'insensitive' } },
+            ],
+          }
+        : undefined,
       include: {
         author: true,
         categories: {
-          include: { category: true }
+          include: { category: true },
         },
-        tags: true
+        tags: true,
       },
-      orderBy: { createdAt: 'desc' }
+      orderBy: { createdAt: 'desc' },
     });
   }
 
@@ -34,8 +40,8 @@ export class PostService {
       include: {
         author: true,
         categories: true,
-        comments: { include: { author: true } }
-      }
+        comments: { include: { author: true } },
+      },
     });
   }
 
@@ -46,20 +52,20 @@ export class PostService {
   static async updatePost(id: number, data: Prisma.PostUpdateInput) {
     return prisma.post.update({
       where: { id },
-      data
+      data,
     });
   }
 
   static async deletePost(id: number) {
     return prisma.post.delete({
-      where: { id }
+      where: { id },
     });
   }
 
   static async getProductInventory() {
     // Shared service logic example
     return prisma.product.findMany({
-      where: { stock: { gt: 0 } }
+      where: { stock: { gt: 0 } },
     });
   }
 }
