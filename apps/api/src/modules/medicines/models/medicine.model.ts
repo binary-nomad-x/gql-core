@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType, Float } from '@nestjs/graphql';
+import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class Medicine {
@@ -16,10 +16,4 @@ export class Medicine {
 
     @Field(() => Int)
     stock: number;
-
-    @Field()
-    createdAt: Date;
-
-    @Field()
-    updatedAt: Date;
 }
