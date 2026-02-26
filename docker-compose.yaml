@@ -1,16 +1,26 @@
 services:
-  db: # host computer yani windows se docker ka bahr software se connect krny k liye host men locahost likhen
-    image: postgres:17-alpine # pgsql 18 has no image on docker hub now until dec 2026
-    container_name: gql-postgres
-    restart: always
+  db:
+    # Tip: Image tag specific rakhna achi practice hai
+    image: postgres:17-alpine
+
+    # container_name ko remove kar diya taaki "Already in use" error kabhi na aaye
+    # Ab Docker iska naam project ke hisab se (gql-core-db-1) khud manage karega
+
+    restart: unless-stopped # 'always' se behtar hai, manually stop karne par restart nahi hoga
+
     ports:
       - '5432:5432'
+
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: gql_core
+
     volumes:
       - pg_data:/var/lib/postgresql/data
+
+    # DB ko thoda time dena chahiye shutdown ke liye taaki data loss na ho
+    stop_grace_period: 1m
 
 volumes:
   pg_data:
