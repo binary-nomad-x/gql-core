@@ -12,4 +12,3 @@ async function bootstrap() {
   console.log(`GraphQL Playground: ${await app.getUrl()}/graphql`);
 }
 bootstrap();
-

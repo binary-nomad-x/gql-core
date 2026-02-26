@@ -5,10 +5,10 @@ import { DoctorsService, Doctor } from '../../services/doctors.service';
 import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-doctors',
-    standalone: true,
-    imports: [CommonModule, FormsModule],
-    template: `
+  selector: 'app-doctors',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  template: `
     <div class="doctors-container">
       <h2>Doctors</h2>
       <div class="add-doctor">
@@ -24,31 +24,47 @@ import { Observable } from 'rxjs';
       </ul>
     </div>
   `,
-    styles: [`
-    .doctors-container { padding: 20px; font-family: sans-serif; }
-    .add-doctor { margin-bottom: 20px; }
-    .add-doctor input { margin-right: 10px; padding: 5px; }
-    .doctor-list { list-style: none; padding: 0; }
-    .doctor-item { padding: 10px; border-bottom: 1px solid #eee; }
-  `]
+  styles: [
+    `
+      .doctors-container {
+        padding: 20px;
+        font-family: sans-serif;
+      }
+      .add-doctor {
+        margin-bottom: 20px;
+      }
+      .add-doctor input {
+        margin-right: 10px;
+        padding: 5px;
+      }
+      .doctor-list {
+        list-style: none;
+        padding: 0;
+      }
+      .doctor-item {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+      }
+    `,
+  ],
 })
 export class DoctorsComponent implements OnInit {
-    doctors$!: Observable<Doctor[]>;
-    newName = '';
-    newSpecialty = '';
+  doctors$!: Observable<Doctor[]>;
+  newName = '';
+  newSpecialty = '';
 
-    constructor(private doctorsService: DoctorsService) { }
+  constructor(private doctorsService: DoctorsService) {}
 
-    ngOnInit(): void {
-        this.doctors$ = this.doctorsService.getDoctors();
+  ngOnInit(): void {
+    this.doctors$ = this.doctorsService.getDoctors();
+  }
+
+  addDoctor(): void {
+    if (this.newName && this.newSpecialty) {
+      this.doctorsService.createDoctor(this.newName, this.newSpecialty).subscribe(() => {
+        this.newName = '';
+        this.newSpecialty = '';
+      });
     }
-
-    addDoctor(): void {
-        if (this.newName && this.newSpecialty) {
-            this.doctorsService.createDoctor(this.newName, this.newSpecialty).subscribe(() => {
-                this.newName = '';
-                this.newSpecialty = '';
-            });
-        }
-    }
+  }
 }

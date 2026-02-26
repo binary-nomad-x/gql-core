@@ -5,20 +5,22 @@ import { CreateMedicineInput } from './dto/create-medicine.input';
 
 @Resolver(() => Medicine)
 export class MedicinesResolver {
-    constructor(private readonly medicinesService: MedicinesService) { }
+  constructor(private readonly medicinesService: MedicinesService) {}
 
-    @Query(() => [Medicine], { name: 'medicines' })
-    findAll() {
-        return this.medicinesService.findAll();
-    }
+  @Query(() => [Medicine], { name: 'medicines' })
+  findAll() {
+    return this.medicinesService.findAll();
+  }
 
-    @Query(() => Medicine, { name: 'medicine' })
-    findOne(@Args('id', { type: () => Int }) id: number) {
-        return this.medicinesService.findOne(id);
-    }
+  @Query(() => Medicine, { name: 'medicine' })
+  findOne(@Args('id', { type: () => Int }) id: number) {
+    return this.medicinesService.findOne(id);
+  }
 
-    @Mutation(() => Medicine)
-    createMedicine(@Args('createMedicineInput') createMedicineInput: CreateMedicineInput) {
-        return this.medicinesService.create(createMedicineInput);
-    }
+  @Mutation(() => Medicine)
+  createMedicine(
+    @Args('createMedicineInput') createMedicineInput: CreateMedicineInput,
+  ) {
+    return this.medicinesService.create(createMedicineInput);
+  }
 }
