@@ -11,9 +11,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 @Module({
   imports: [
     PrismaModule,
-    DoctorsModule,
-    AppointmentsModule,
-    MedicinesModule,
+    AuthModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'apps/api/src/schema.gql'),
