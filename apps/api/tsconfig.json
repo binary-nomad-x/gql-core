@@ -3,8 +3,18 @@
   "compilerOptions": {
     "outDir": "../../dist/apps/api",
     "rootDir": "src",
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
+    "noEmit": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"],
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "test",
+    "dist",
+    "**/*spec.ts"
+  ],
 }

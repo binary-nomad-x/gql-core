@@ -45,3 +45,6 @@ coverage/
 
 # Optional: TypeScript cache
 *.tsbuildinfo
+
+# Angular cache
+.angular/cache

@@ -4,12 +4,14 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { HealthModule } from './modules/health/health.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
 @Module({
   imports: [
     PrismaModule,
     AuthModule,
+    HealthModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'apps/api/src/schema.gql'),
@@ -18,4 +20,4 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
     }),
   ],
 })
-export class AppModule {}
+export class AppModule { }
