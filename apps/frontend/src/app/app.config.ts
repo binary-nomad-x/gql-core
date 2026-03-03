@@ -2,28 +2,25 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
-import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { provideApollo } from 'apollo-angular'; // Naya import
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
-import { importProvidersFrom } from '@angular/core';
+import { inject } from '@angular/core'; // Inject use karenge
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-    importProvidersFrom(ApolloModule),
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: (httpLink: HttpLink) => {
-        return {
-          cache: new InMemoryCache(),
-          link: httpLink.create({
-            uri: 'http://localhost:3000/graphql',
-          }),
-        };
-      },
-      deps: [HttpLink],
-    },
+    // Naya provider jo ApolloModule ki jagah lega
+    provideApollo(() => {
+      const httpLink = inject(HttpLink);
+      return {
+        cache: new InMemoryCache(),
+        link: httpLink.create({
+          uri: 'http://localhost:3000/graphql',
+        }),
+      };
+    }),
   ],
 };
