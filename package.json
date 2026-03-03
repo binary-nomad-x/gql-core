@@ -11,7 +11,7 @@
     "apps/*"
   ],
   "scripts": {
-    "start:api": "nest start api --watch",
+    "start:api": "nest start --watch",
     "start:web": "ng serve frontend",
     "dev": "concurrently -n \"API,WEB\" -c \"cyan,magenta\" \"npm run start:api\" \"npm run start:web\"",
     "build": "npm run build:api && npm run build:web",
