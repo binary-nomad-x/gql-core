@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { join } from 'path';
+// import { join } from 'path';
 
 async function bootstrap() {
   console.log('DATABASE_URL:', process.env.DATABASE_URL);
