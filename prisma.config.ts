@@ -6,7 +6,9 @@ import { resolve } from 'path';
 dotenv.config({ path: resolve(__dirname, '.env') });
 
 export default defineConfig({
-    datasource: {
-        url: process.env.DATABASE_URL || "postgresql://postgres:password@localhost:5432/gql_core?schema=public",
-    },
+  datasource: {
+    url:
+      process.env.DATABASE_URL ||
+      'postgresql://postgres:password@localhost:5432/gql_core?schema=public',
+  },
 });

@@ -9,7 +9,7 @@ export class AppointmentsResolver {
 
   @Query(() => [Appointment], { name: 'appointments' })
   findAll() {
-    return this.appointmentsService.findAll();
+    return this.appointmentsService.getAllAppointments();
   }
 
   @Mutation(() => Appointment)
@@ -17,6 +17,6 @@ export class AppointmentsResolver {
     @Args('createAppointmentInput')
     createAppointmentInput: CreateAppointmentInput,
   ) {
-    return this.appointmentsService.create(createAppointmentInput);
+    return this.appointmentsService.createAppointment(createAppointmentInput);
   }
 }

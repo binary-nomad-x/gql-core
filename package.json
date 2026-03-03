@@ -6,8 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "workspaces": [
-    "apps/api",
-    "apps/frontend"
+    "apps/*"
   ],
   "scripts": {
     "build": "nest build",
@@ -25,8 +24,9 @@
     "db:gen": "prisma generate",
     "db:push": "prisma db push",
     "migrate:dev": "prisma migrate dev",
-    "start:frontend": "cd apps/frontend && npm start",
-    "start:all": "concurrently \"npm run start:dev\" \"npm run start:frontend\""
+    "start:api": "npm run start --workspace=apps/api",
+    "start:frontend": "npm run start --workspace=apps/frontend",
+    "build:all": "npm run build --workspaces"
   },
   "dependencies": {
     "@apollo/server": "^4.11.3",
