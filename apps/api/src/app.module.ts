@@ -4,9 +4,6 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { DoctorsModule } from './modules/doctors/doctors.module';
-import { MedicinesModule } from './modules/medicines/medicines.module';
-import { AppointmentsModule } from './modules/appointments/appointments.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
 @Module({

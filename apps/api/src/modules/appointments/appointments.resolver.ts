@@ -5,17 +5,18 @@ import { CreateAppointmentInput } from './dto/create-appointment.input';
 
 @Resolver(() => Appointment)
 export class AppointmentsResolver {
-    constructor(private readonly appointmentsService: AppointmentsService) { }
+  constructor(private readonly appointmentsService: AppointmentsService) {}
 
-    @Query(() => [Appointment], { name: 'appointments' })
-    findAll() {
-        return this.appointmentsService.findAll();
-    }
+  @Query(() => [Appointment], { name: 'appointments' })
+  findAll() {
+    return this.appointmentsService.findAll();
+  }
 
-    @Mutation(() => Appointment)
-    createAppointment(
-        @Args('createAppointmentInput') createAppointmentInput: CreateAppointmentInput,
-    ) {
-        return this.appointmentsService.create(createAppointmentInput);
-    }
+  @Mutation(() => Appointment)
+  createAppointment(
+    @Args('createAppointmentInput')
+    createAppointmentInput: CreateAppointmentInput,
+  ) {
+    return this.appointmentsService.create(createAppointmentInput);
+  }
 }

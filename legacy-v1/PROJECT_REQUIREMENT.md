@@ -8,7 +8,7 @@
 
 **New Scale:** 10x features, microservices architecture, supports 100k+ SKUs, 50+ warehouses globally.
 
-***
+---
 
 ## 🛠 **Enhanced Tech Stack (Production-Ready)**
 
@@ -36,11 +36,12 @@ DevOps:
 └── Vercel/Netlify for previews
 ```
 
-***
+---
 
 ## 📊 **Phase 1-4: Feature Roadmap**
 
 ### **Phase 1: Core Inventory (2 weeks)**
+
 ```
 ✅ Existing: Products, Suppliers, StockIn/Out, Low Stock Alerts
 🆕 Additions:
@@ -51,6 +52,7 @@ DevOps:
 ```
 
 ### **Phase 2: Procurement & Suppliers (2 weeks)**
+
 ```
 🆕 Features:
 - Automated Reorder Points (AI-driven)
@@ -61,6 +63,7 @@ DevOps:
 ```
 
 ### **Phase 3: Advanced Analytics & AI (3 weeks)**
+
 ```
 🆕 Intelligence Layer:
 - Demand Forecasting (using Prophet.js or TensorFlow.js)
@@ -70,6 +73,7 @@ DevOps:
 ```
 
 ### **Phase 4: Enterprise Features (3 weeks)**
+
 ```
 🆕 Enterprise Tier:
 - Multi-Tenant (SaaS mode for 3PL providers)
@@ -79,7 +83,7 @@ DevOps:
 - White-labeling for resellers
 ```
 
-***
+---
 
 ## 🗄 **Expanded Prisma Schema**
 
@@ -130,7 +134,7 @@ model Product {
   batches        Batch[]
   stockLogs      StockLog[]
   createdAt      DateTime @default(now())
-  
+
   @@index([sku])
   @@index([supplierId])
 }
@@ -194,16 +198,17 @@ enum UserRole {
 }
 ```
 
-***
+---
 
 ## ⚡ **Key Implementation Highlights**
 
 ### **1. Microservices Architecture**
+
 ```
 docker-compose.yml (10+ services):
 ├── api-gateway (NestJS)
 ├── inventory-service
-├── procurement-service  
+├── procurement-service
 ├── analytics-service (TimescaleDB)
 ├── notifier-service (WebSockets)
 ├── minio (file storage)
@@ -211,6 +216,7 @@ docker-compose.yml (10+ services):
 ```
 
 ### **2. AI-Powered Features**
+
 ```typescript
 // Demand Forecasting Service
 import * as prophet from 'prophet';
@@ -223,6 +229,7 @@ async forecastDemand(productId: string, historicalData: StockLog[]) {
 ```
 
 ### **3. Real-Time Dashboard (Angular 18)**
+
 ```
 📊 Widgets:
 - Live Stock Levels (Gauge Charts)
@@ -233,6 +240,7 @@ async forecastDemand(productId: string, historicalData: StockLog[]) {
 ```
 
 ### **4. Advanced PDF/Reporting Engine**
+
 ```typescript
 // Multi-template EJS system
 const templates = {
@@ -248,7 +256,7 @@ async generateReport(templateKey: keyof typeof templates, data: any) {
 }
 ```
 
-***
+---
 
 ## 🚀 **Development Roadmap (8 Weeks)**
 
@@ -261,7 +269,7 @@ Week 7: Mobile PWA + Barcode Scanner
 Week 8: Polish + Deployment (Docker/K8s)
 ```
 
-***
+---
 
 ## 📋 **Production Deliverables**
 
@@ -278,9 +286,10 @@ Week 8: Polish + Deployment (Docker/K8s)
 ✅ [ ] Mobile PWA (offline-first inventory scanning)
 ```
 
-***
+---
 
 ## 💎 **Monetization Ready Features**
+
 ```
 💰 SaaS Pricing Tiers:
 - Starter: $49/mo (1 warehouse, 1k SKUs)
@@ -288,6 +297,6 @@ Week 8: Polish + Deployment (Docker/K8s)
 - Enterprise: Custom (unlimited + white-label)
 ```
 
-This is now a **$100k+ Upwork project**—enterprise-grade, scalable, and ready to disrupt supply chain management! 
+This is now a **$100k+ Upwork project**—enterprise-grade, scalable, and ready to disrupt supply chain management!
 
 Want me to generate any specific code files (like the full `docker-compose.yml` or Angular dashboard components)? Or focus on a particular microservice first?
