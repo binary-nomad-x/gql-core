@@ -1,9 +1,10 @@
 {
   "collection": "@nestjs/schematics",
   "sourceRoot": "apps/api/src",
+  "monorepo": true,
   "projects": {
     "api": {
-      "type": "library",
+      "type": "application",
       "root": "apps/api",
       "entryFile": "main",
       "sourceRoot": "apps/api/src",
