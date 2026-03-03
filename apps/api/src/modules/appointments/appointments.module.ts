@@ -3,6 +3,6 @@ import { AppointmentsService } from './appointments.service';
 import { AppointmentsResolver } from './appointments.resolver';
 
 @Module({
-    providers: [AppointmentsService, AppointmentsResolver],
+  providers: [AppointmentsService, AppointmentsResolver],
 })
-export class AppointmentsModule { }
+export class AppointmentsModule {}
