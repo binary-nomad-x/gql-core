@@ -6,13 +6,13 @@ import { CreateAppointmentInput } from './dto/create-appointment.input';
 export class AppointmentsService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll() {
+  async getAllAppointments() {
     return this.prisma.appointment.findMany({
       include: { doctor: true },
     });
   }
 
-  async create(data: CreateAppointmentInput) {
+  async createAppointment(data: CreateAppointmentInput) {
     return this.prisma.appointment.create({
       data: {
         date: data.date,
