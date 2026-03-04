@@ -182,13 +182,14 @@ npm run build
 
 ### **Backend (NestJS) Commands**
 
-| Task              | Command                                   | Example                          |
-| ----------------- | ----------------------------------------- | -------------------------------- |
-| Generate Module   | `npx nest g mo modules/<module-name> api` | `npx nest g mo modules/user api` |
-| Generate Resolver | `npx nest g r modules/<module-name> api`  | `npx nest g r modules/user api`  |
-| Generate Service  | `npx nest g s modules/<module-name> api`  | `npx nest g s modules/user api`  |
-| Start Backend     | `npm run start:api`                       |                                  |
-| Build Backend     | `npm run build:api`                       |                                  |
+| Task                      | Command                                   | Example                                |
+| ------------------------- | ----------------------------------------- | -------------------------------------- |
+| Generate Module           | `npx nest g mo modules/<module-name> api` | `npx nest g mo modules/user api`       |
+| Generate Resolver         | `npx nest g r modules/<module-name> api`  | `npx nest g r modules/user api`        |
+| Generate Service          | `npx nest g s modules/<module-name> api`  | `npx nest g s modules/user api`        |
+| Generate (master-command) | `npx nest g r modules/<module-name> api`  | `npx nest g resource modules/user api` |
+| Start Backend             | `npm run start:api`                       |                                        |
+| Build Backend             | `npm run build:api`                       |                                        |
 
 ---
 
