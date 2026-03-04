@@ -3,5 +3,5 @@
 # ------------------------------------------------------
 
 type Query {
-  health: String!
+    health: String!
 }

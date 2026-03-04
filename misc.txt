@@ -1,1 +1,4 @@
 mech-vibe-theme : cherryMX RED - ABS Keymaps
+
+// shayeri
+https://www.youtube.com/watch?v=I1_vTtXHXic
