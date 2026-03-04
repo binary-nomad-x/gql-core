@@ -6,8 +6,8 @@ import { PrismaModule } from './modules/prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { HealthModule } from './modules/health/health.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { UserModule } from './modules/user/user.module';
-import { UserModule } from './api/modules/user/user.module';
+// import { UserModule } from './modules/user/user.module';
+// import { UserModule } from './api/modules/user/user.module';
 
 @Module({
   imports: [
@@ -20,7 +20,7 @@ import { UserModule } from './api/modules/user/user.module';
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
-    UserModule,
+    // UserModule,
   ],
 })
 export class AppModule {}
