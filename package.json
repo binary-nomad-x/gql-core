@@ -10,8 +10,8 @@
     "apps/*"
   ],
   "scripts": {
-    "start:api": "nest start api --watch",
-    "start:web": "ng serve frontend",
+    "start:api": "nest start api --watch -- --port 3001",
+    "start:web": "ng serve frontend --port 4201",
     "dev": "concurrently -n \"API,WEB\" -c \"cyan,magenta\" \"npm run start:api\" \"npm run start:web\"",
     "build": "npm run build:api && npm run build:web",
     "build:api": "nest build api",
