@@ -6,6 +6,7 @@ import { provideApollo } from 'apollo-angular'; // Naya import
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { inject } from '@angular/core'; // Inject use karenge
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +19,8 @@ export const appConfig: ApplicationConfig = {
       return {
         cache: new InMemoryCache(),
         link: httpLink.create({
-          uri: 'http://localhost:3000/graphql',
+          // uri: 'http://localhost:3000/graphql',
+          uri: environment.graphqlUrl,
         }),
       };
     }),
