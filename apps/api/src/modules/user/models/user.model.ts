@@ -1,23 +1,18 @@
-import { ObjectType, Field, registerEnumType } from '@nestjs/graphql';
+import { ObjectType, Field, ID, registerEnumType } from '@nestjs/graphql'; // ID import karein
 import { Role } from '@prisma/client';
-import { randomUUID } from 'node:crypto';
 
-// Enum ko register karna zaroori hai taake GraphQL schema ko samajh sakay
-registerEnumType(Role, {
-  name: 'Role',
-  description: 'The user roles available in the system',
-});
+registerEnumType(Role, { name: 'Role' });
 
 @ObjectType()
 export class User {
-  @Field(() => randomUUID)
-  id!: string; // '!' means that its value is mandatory at run-time
+  @Field(() => ID) // Yahan ID hona chahiye, randomUUID nahi
+  id!: string;
 
   @Field()
   email!: string;
 
   @Field({ nullable: true })
-  name?: string; // '?' theek hai kyunki ye database mein bhi optional ho sakti hai
+  name?: string;
 
   @Field(() => Role)
   role!: Role;

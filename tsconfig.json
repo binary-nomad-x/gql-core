@@ -13,19 +13,12 @@
     "noEmit": false,
     "baseUrl": "./",
     "paths": {
-      "@api/*": [
-        "apps/api/src/*"
-      ],
-      "@frontend/*": [
-        "apps/frontend/src/*"
-      ],
-      "@shared/*": [
-        "libs/shared-types/*"
-      ],
+      "@api/*": ["apps/api/src/*"],
+      "@frontend/*": ["apps/frontend/src/*"],
+      "@shared/*": ["libs/shared-types/*"],
+      "@util/*": ["libs/util/*"],
+      "@util": ["libs/util/helpers"],
     },
   },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ],
+  "exclude": ["node_modules", "dist"],
 }

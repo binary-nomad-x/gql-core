@@ -1,10 +1,10 @@
 import * as bcrypt from 'bcrypt';
 
-const hashPassword = async (password: string, saltOrRoutes: number = 10) => {
+export const hashPassword = async (password: string, saltOrRoutes: number = 10) => {
   return await bcrypt.hash(password, saltOrRoutes);
 };
 
-const comparePassword = async (
+export const comparePassword = async (
   plainPassword: string,
   hashedPassword: string,
 ) => {
