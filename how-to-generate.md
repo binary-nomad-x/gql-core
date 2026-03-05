@@ -182,16 +182,14 @@ npm run build
 
 ### **Backend (NestJS) Commands**
 
-| Task                      | Command                                   | Example                                |
-| ------------------------- | ----------------------------------------- | -------------------------------------- |
-| Generate Module           | `npx nest g mo modules/<module-name> api` | `npx nest g mo modules/user api`       |
-| Generate Resolver         | `npx nest g r modules/<module-name> api`  | `npx nest g r modules/user api`        |
-| Generate Service          | `npx nest g s modules/<module-name> api`  | `npx nest g s modules/user api`        |
-| Generate (master-command) | `npx nest g r modules/<module-name> api`  | `npx nest g resource modules/user api` |
-| Start Backend             | `npm run start:api`                       |                                        |
-| Build Backend             | `npm run build:api`                       |                                        |
-
----
+| Task              | Command                                          | Example                                        |
+| ----------------- | ------------------------------------------------ | ---------------------------------------------- |
+| Generate Module   | npx nest g mo modules/<name> --project api       | npx nest g mo modules/user --project api       |
+| Generate Resolver | npx nest g r modules/<name> --project api        | npx nest g r modules/user --project api        |
+| Generate Service  | npx nest g s modules/<name> --project api        | npx nest g s modules/user --project api        |
+| Generate Resource | npx nest g resource modules/<name> --project api | npx nest g resource modules/user --project api |
+| Start Backend     | npm run start <project-name>                     | npm run start api                              |
+| Build Backend     | npm run build <project-name>                     | npm run build api                              |
 
 ### **Frontend (Angular) Commands**
 
@@ -207,14 +205,14 @@ npm run build
 
 ### **Prisma Commands**
 
-| Task                   | Command              | Example |
-| ---------------------- | -------------------- | ------- |
-| Push Schema Changes    | `npm run db:push`    |         |
-| Generate Prisma Client | `npm run db:gen`     |         |
-| Open Prisma Studio     | `npm run db:studio`  |         |
-| Create Migration       | `npm run db:migrate` |         |
-| Start Database         | `npm run db:up`      |         |
-| Stop Database          | `npm run db:down`    |         |
+| Task                   | Command              |
+| ---------------------- | -------------------- |
+| Push Schema Changes    | `npm run db:push`    |
+| Generate Prisma Client | `npm run db:gen`     |
+| Open Prisma Studio     | `npm run db:studio`  |
+| Create Migration       | `npm run db:migrate` |
+| Start Database         | `npm run db:up`      |
+| Stop Database          | `npm run db:down`    |
 
 ---
 

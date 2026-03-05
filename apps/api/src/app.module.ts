@@ -11,6 +11,7 @@ import { AppResolver } from './app.resolver';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
+    UserModule,
   ],
   providers: [AppService, AppResolver], // necessary things to make it work
 })
