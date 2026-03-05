@@ -11,7 +11,7 @@ registerEnumType(Role, {
 @ObjectType()
 export class User {
   @Field(() => randomUUID)
-  id!: string; // '!' ka matlab hai ke ye property runtime par zaroor hogi
+  id!: string; // '!' means that its value is mandatory at run-time
 
   @Field()
   email!: string;
