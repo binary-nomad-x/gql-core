@@ -1,6 +1,9 @@
 import * as bcrypt from 'bcrypt';
 
-export const hashPassword = async (password: string, saltOrRoutes: number = 10) => {
+export const hashPassword = async (
+  password: string,
+  saltOrRoutes: number = 10,
+) => {
   return await bcrypt.hash(password, saltOrRoutes);
 };
 
