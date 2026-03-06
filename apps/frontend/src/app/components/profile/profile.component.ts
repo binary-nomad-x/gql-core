@@ -7,4 +7,4 @@ import { Component } from '@angular/core';
   template: ` <p>profile works!</p> `,
   styleUrl: './profile.component.scss',
 })
-export class ProfileComponent { }
+export class ProfileComponent {}

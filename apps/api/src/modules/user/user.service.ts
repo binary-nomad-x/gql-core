@@ -9,15 +9,11 @@ export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async create(createUserInput: CreateUserInput) {
-    // 1. Password hash karein
-    const hashedPassword = await hashPassword(createUserInput.password);
-
-    // 2. Database mein save karein
     return this.prisma.user.create({
       data: {
         email: createUserInput.email,
         name: createUserInput.name,
-        passwordHash: hashedPassword,
+        passwordHash: await hashPassword(createUserInput.password),
       },
     });
   }
