@@ -18,11 +18,17 @@
     "build:web": "ng build frontend",
     "db:gen": "prisma generate",
     "db:push": "prisma db push",
+    "db:push:force": "prisma db push --accept-data-loss",
     "db:migrate": "prisma migrate dev",
+    "db:migrate:create": "prisma migrate dev --create-only",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:migrate:reset": "prisma migrate reset --force",
+    "db:status": "prisma migrate status",
+    "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
-    "postinstall": "prisma generate",
     "db:up": "docker-compose up -d",
-    "db:down": "docker-compose down"
+    "db:down": "docker-compose down",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@angular/animations": "^19.1.0",

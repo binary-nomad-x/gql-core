@@ -12,11 +12,21 @@ enum Role {
   MEMBER
 }
 
+model Gender {
+  id String @id @default(uuid())
+  name String
+  users User[]
+}
+
 model User {
   id String @id @default(uuid())
   email String @unique
-  passwordHash String
+  password String
   name String?
   role Role @default(MEMBER)
+
+  genderId String?
+  gender Gender? @relation(fields: [genderId], references : [id] )
+
   createdAt DateTime @default(now())
 }

@@ -2,11 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Gender {
+  id: ID!
+  name: String!
+}
+
 type User {
   id: ID!
   email: String!
   name: String
   role: Role!
+  gender: Gender
   createdAt: DateTime!
 }
 
@@ -36,11 +42,13 @@ input CreateUserInput {
   email: String!
   password: String!
   name: String
+  genderId: String
 }
 
 input UpdateUserInput {
   email: String
   password: String
   name: String
+  genderId: String
   id: ID!
 }

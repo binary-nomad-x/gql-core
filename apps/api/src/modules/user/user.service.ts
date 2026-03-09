@@ -1,19 +1,40 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UpdateUserInput } from './dto/update-user.input';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { hashPassword } from '@util/helpers';
+import { Role } from '@prisma/client';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async create(createUserInput: CreateUserInput) {
+    if (
+      createUserInput.role &&
+      !Object.values(Role).includes(createUserInput.role)
+    ) {
+      throw new BadRequestException(
+        `Invalid role: ${createUserInput.role}. Allowed roles are: ${Object.values(Role).join(', ')}`,
+      );
+    }
+
+    // todo : check email validity
+
     return this.prisma.user.create({
       data: {
         email: createUserInput.email,
         name: createUserInput.name,
-        passwordHash: await hashPassword(createUserInput.password),
+        password: await hashPassword(createUserInput.password),
+        role: createUserInput.role || Role.MEMBER,
+        ...(createUserInput.genderId && {
+          gender: {
+            connect: { id: createUserInput.genderId },
+          },
+        }),
+      },
+      include: {
+        gender: true,
       },
     });
   }
