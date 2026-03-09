@@ -44,6 +44,8 @@
     "@nestjs/platform-express": "^11.0.1",
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.0",
+    "ag-grid-angular": "^35.1.0",
+    "ag-grid-community": "^35.1.0",
     "apollo-angular": "^13.0.0",
     "bcrypt": "^6.0.0",
     "graphql": "^16.10.0",
