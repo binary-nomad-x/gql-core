@@ -20,9 +20,7 @@
             "outputPath": "dist/apps/frontend",
             "index": "apps/frontend/src/index.html",
             "browser": "apps/frontend/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "apps/frontend/tsconfig.app.json",
             "assets": [
               {
@@ -31,9 +29,7 @@
                 "output": "/"
               }
             ],
-            "styles": [
-              "apps/frontend/src/styles.css"
-            ],
+            "styles": ["apps/frontend/src/styles.css"],
             "scripts": [],
             "extractLicenses": false,
             "sourceMap": true,
