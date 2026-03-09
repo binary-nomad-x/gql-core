@@ -28,7 +28,9 @@
     "db:studio": "prisma studio",
     "db:up": "docker-compose up -d",
     "db:down": "docker-compose down",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "db:sync": "prisma db push --accept-data-loss && prisma generate",
+    "db:sync:seed": "prisma db push --accept-data-loss && prisma generate && prisma db seed"
   },
   "dependencies": {
     "@angular/animations": "^19.1.0",
