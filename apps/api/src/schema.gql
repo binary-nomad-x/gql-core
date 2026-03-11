@@ -43,6 +43,7 @@ input CreateUserInput {
   password: String!
   name: String
   genderId: String
+  role: Role! = MEMBER
 }
 
 input UpdateUserInput {
@@ -50,5 +51,6 @@ input UpdateUserInput {
   password: String
   name: String
   genderId: String
+  role: Role = MEMBER
   id: ID!
 }
