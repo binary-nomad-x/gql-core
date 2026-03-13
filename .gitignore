@@ -49,3 +49,6 @@ coverage/
 
 # Angular cache
 .angular/cache
+
+# zed editor 
+.zed
